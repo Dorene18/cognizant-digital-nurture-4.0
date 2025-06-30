@@ -1,0 +1,58 @@
+
+
+DROP TABLE IF EXISTS Loans;More actions
+DROP TABLE IF EXISTS Customers;
+
+--  Create Customers table
+CREATE TABLE Customers (
+    CustomerID INTEGER PRIMARY KEY,
+    Name TEXT,
+    Age INTEGER,
+    Balance REAL,
+    IsVIP TEXT DEFAULT 'N'
+);
+
+-- Create Loans table
+CREATE TABLE Loans (
+    LoanID INTEGER PRIMARY KEY,
+    CustomerID INTEGER,
+    InterestRate REAL,
+    DueDate TEXT
+);
+--  Insert sample customersMore actions
+INSERT INTO Customers (CustomerID, Name, Age, Balance)
+VALUES 
+(1, 'Alice', 65, 15000),
+(2, 'Bob', 45, 8000),
+(3, 'Charlie', 70, 20000);
+
+--  Insert sample loans
+INSERT INTO Loans (LoanID, CustomerID, InterestRate, DueDate)
+VALUES 
+(101, 1, 5.0, '2024-07-10'),
+(102, 2, 6.0, '2024-08-20'),
+(103, 3, 4.5, '2024-07-05');
+
+--  Scenario 1: Apply 1% discount to loans for customers older than 60
+UPDATE Loans
+SET InterestRate = InterestRate - 1
+WHERE CustomerID IN (
+    SELECT CustomerID FROM Customers WHERE Age > 60
+);
+
+--  Check Loans after discount
+SELECT * FROM Loans;
+
+--  Scenario 2: Promote customers to VIP if balance > 10,000
+UPDATE Customers
+SET IsVIP = 'Y'
+WHERE Balance > 10000;
+
+--  Check Customers after VIP update
+SELECT * FROM Customers;
+
+--  Scenario 3: Show loans due in next 30 days
+SELECT L.LoanID, L.DueDate, C.Name 
+FROM Loans L
+JOIN Customers C ON L.CustomerID = C.CustomerID
+WHERE DATE(L.DueDate) BETWEEN DATE('2024-07-01') AND DATE('2024-07-31');
