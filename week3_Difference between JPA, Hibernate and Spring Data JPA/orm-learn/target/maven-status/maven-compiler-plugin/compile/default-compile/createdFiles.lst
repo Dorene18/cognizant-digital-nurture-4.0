@@ -1,0 +1,4 @@
+com\cognizant\ormlearn\repository\EmployeeRepository.class
+com\cognizant\ormlearn\OrmLearnApplication.class
+com\cognizant\ormlearn\model\Employee.class
+com\cognizant\ormlearn\service\EmployeeService.class
