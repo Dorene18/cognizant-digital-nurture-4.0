@@ -1,0 +1,27 @@
+.score-container {
+  text-align: center;
+  margin-top: 50px;
+  font-family: Arial, sans-serif;
+}
+
+.main-heading {
+  color: darkred;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.label-blue {
+  color: blue;
+}
+
+.label-red {
+  color: crimson;
+}
+
+.label-purple {
+  color: purple;
+}
+
+.label-green {
+  color: green;
+}
